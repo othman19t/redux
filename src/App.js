@@ -12,6 +12,10 @@ const store = createStore((state = { count: 0 }, action) => {
       return {
         count: state.count - 1,
       };
+    case "RESET":
+      return {
+        count: 0,
+      };
     default:
       return state;
   }
@@ -25,6 +29,11 @@ store.dispatch({
 // creating a type for an action to decrement the counter
 store.dispatch({
   type: "DECREMENT",
+});
+
+// creating a type for an action to reset the counter
+store.dispatch({
+  type: "RESET",
 });
 
 console.log(store.getState()); // to get the state on the store
