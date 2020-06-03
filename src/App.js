@@ -1,10 +1,23 @@
 import React from "react";
 import { createStore } from "redux"; // npm i redux
 
-//create store 
-const store = createStore((state = { count: 0 }) => {
-  return state;
+//create store + adding action as an argument + taking action
+const store = createStore((state = { count: 0 }, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return {
+        count: state.count + 1,
+      };
+    default:
+      return state;
+  }
 });
+
+// creating a type for an action and dispatching it
+store.dispatch({
+  type: "INCREMENT",
+});
+
 console.log(store.getState()); // to get the state on the store
 
 function App() {
