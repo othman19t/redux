@@ -8,6 +8,10 @@ const store = createStore((state = { count: 0 }, action) => {
       return {
         count: state.count + 1,
       };
+    case "DECREMENT":
+      return {
+        count: state.count - 1,
+      };
     default:
       return state;
   }
@@ -16,6 +20,11 @@ const store = createStore((state = { count: 0 }, action) => {
 // creating a type for an action and dispatching it
 store.dispatch({
   type: "INCREMENT",
+});
+
+// creating a type for an action to decrement the counter
+store.dispatch({
+  type: "DECREMENT",
 });
 
 console.log(store.getState()); // to get the state on the store
