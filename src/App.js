@@ -21,6 +21,10 @@ const store = createStore((state = { count: 0 }, action) => {
   }
 });
 
+const unsubscribe = store.subscribe(() => {
+  console.log(store.getState()); // to get the state on the store
+});
+
 // creating a type for an action and dispatching it
 store.dispatch({
   type: "INCREMENT",
@@ -31,12 +35,12 @@ store.dispatch({
   type: "DECREMENT",
 });
 
+unsubscribe(); // seeing the result till here only
+
 // creating a type for an action to reset the counter
 store.dispatch({
   type: "RESET",
 });
-
-console.log(store.getState()); // to get the state on the store
 
 function App() {
   return (
