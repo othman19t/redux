@@ -12,8 +12,10 @@ const store = createStore((state = { count: 0 }, action) => {
         count: state.count + incrementBy,
       };
     case "DECREMENT":
+      const decrementBy =
+        typeof action.decrementBy === "number" ? action.decrementBy : 1;
       return {
-        count: state.count - 1,
+        count: state.count - decrementBy,
       };
     case "RESET":
       return {
@@ -31,12 +33,13 @@ const unsubscribe = store.subscribe(() => {
 // creating a type for an action and dispatching it
 store.dispatch({
   type: "INCREMENT",
-  incrementBy: 5, // sending the incrementBy value 
+  incrementBy: 5, // sending the incrementBy value
 });
 
 // creating a type for an action to decrement the counter
 store.dispatch({
   type: "DECREMENT",
+  decrementBy: 3,
 });
 
 unsubscribe(); // seeing the result till here only
