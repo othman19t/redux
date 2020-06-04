@@ -7,6 +7,10 @@ const increment = ({ incrementBy = 1 } = {}) => ({
   incrementBy,
 });
 
+const decrement = ({ decrementBy = 1 } = {}) => ({
+  type: "DECREMENT",
+  decrementBy,
+});
 //create store + adding action as an argument + taking action
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
@@ -16,10 +20,8 @@ const store = createStore((state = { count: 0 }, action) => {
         count: state.count + action.incrementBy,
       };
     case "DECREMENT":
-      const decrementBy =
-        typeof action.decrementBy === "number" ? action.decrementBy : 1;
       return {
-        count: state.count - decrementBy,
+        count: state.count - action.decrementBy,
       };
     case "RESET":
       return {
@@ -38,10 +40,7 @@ const unsubscribe = store.subscribe(() => {
 store.dispatch(increment({ incrementBy: 5 }));
 
 // creating a type for an action to decrement the counter
-store.dispatch({
-  type: "DECREMENT",
-  decrementBy: 3,
-});
+store.dispatch({ decrementBy: 3 });
 
 unsubscribe(); // seeing the result till here only
 
