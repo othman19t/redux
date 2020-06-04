@@ -40,7 +40,7 @@ const unsubscribe = store.subscribe(() => {
 store.dispatch(increment({ incrementBy: 5 }));
 
 // creating a type for an action to decrement the counter
-store.dispatch({ decrementBy: 3 });
+store.dispatch(decrement({ decrementBy: 4 }));
 
 unsubscribe(); // seeing the result till here only
 
