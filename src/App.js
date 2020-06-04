@@ -1,15 +1,19 @@
 import React from "react";
 import { createStore } from "redux"; // npm i redux
 
+//define increment function
+const increment = ({ incrementBy = 1 } = {}) => ({
+  type: "INCREMENT",
+  incrementBy,
+});
+
 //create store + adding action as an argument + taking action
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case "INCREMENT":
       // to check if incrementBy is defined if not return 1
-      const incrementBy =
-        typeof action.incrementBy === "number" ? action.incrementBy : 1;
       return {
-        count: state.count + incrementBy,
+        count: state.count + action.incrementBy,
       };
     case "DECREMENT":
       const decrementBy =
@@ -31,10 +35,7 @@ const unsubscribe = store.subscribe(() => {
 });
 
 // creating a type for an action and dispatching it
-store.dispatch({
-  type: "INCREMENT",
-  incrementBy: 5, // sending the incrementBy value
-});
+store.dispatch(increment({ incrementBy: 5 }));
 
 // creating a type for an action to decrement the counter
 store.dispatch({
